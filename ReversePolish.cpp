@@ -7,61 +7,49 @@
 #include <iostream>
 #include <stack>
 #include <vector>
-#include <stdio.h>
-#include <stdlib.h>
 #include <string>
 using namespace std;
 
 class Solution {
 public:
     int evalRPN(vector<string> &tokens) {
-		stack<int> s;
-		for(vector<string>::iterator it = tokens.begin(); it!=tokens.end(); it++)//顺序访问
+       stack<int> s;
+       int x1,x2;
+		for(vector<string>::iterator it = tokens.begin(); it!=tokens.end(); it++)
 		{
 			string tmp = *it;
-			int x1,x2;
-
 			switch(tmp[0])
 			{
-				//int x1,x2;
 				case '+':
-					x1 = s.top();
-					s.pop();
-					x2 = s.top();
-					s.pop();
+					x1 = s.top();s.pop();
+					x2 = s.top();s.pop();
 					s.push(x2+x1);
 					break;
 				case '-':
-					if(tmp.length() > 1)
+			     	if(tmp.length() > 1)
 					{
 						s.push(atoi(tmp.c_str()));
 						break;
 					}
-					x1 = s.top();
-					s.pop();
-					x2 = s.top();
-					s.pop();
+					x1 = s.top();s.pop();
+					x2 = s.top();s.pop();
 					s.push(x2-x1);
 					break;
 				case '*':
-					x1 = s.top();
-					s.pop();
-					x2 = s.top();
-					s.pop();
+					x1 = s.top();s.pop();
+			       	x2 = s.top();s.pop();
 					s.push(x2*x1);
 					break;
 				case '/':
-					x1 = s.top();
-					s.pop();
-					x2 = s.top();
-					s.pop();
+					x1 = s.top();s.pop();
+					x2 = s.top();s.pop();
 					s.push(x2/x1);
 					break;
 				default:
 					s.push(atoi(tmp.c_str()));
 			}
 		}
-		return s.top();
+		return s.top(); 
     }
 };
 
@@ -78,8 +66,5 @@ int main()
 	Solution s;
 	int xx = s.evalRPN(test);
 	cout << xx << endl;
-	//cout  << s.evalRPN(test1);
-	//int testchu = 13/5;
-	//cout << testchu << endl;
 	return 0;
 }
